@@ -19,7 +19,7 @@ def service_function(service: Service, global_config, count):
     in_module, out_module = import_modules(service.name, False)
 
     # this event handler will reload modules on changes
-    watchdog_handler = ModuleWatchdog(regexes=[f".*{service.name}.*\.py"], in_module=in_module,
+    watchdog_handler = ModuleWatchdog(regexes=[f".*{service.name}.*\.py$"], in_module=in_module,
                                     out_module=out_module, name=service.name)
     observer = Observer()
     observer.schedule(watchdog_handler, path=os.path.join(constants.MODULES_PATH, service.name), recursive=False)
